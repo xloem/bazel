@@ -212,7 +212,8 @@ wstring AsShortPath(wstring path, wstring* result) {
     return MakeErrorMessage(WSTR(__FILE__), __LINE__, L"AsShortPath", path,
                             L"path is not normalized");
   }
-  if (path.size() >= MAX_PATH && !HasSeparator(path)) {
+  // Comparing to MAX_PATH - 2 to fix https://github.com/bazelbuild/bazel/issues/12310
+  if (path.size() >= MAX_PATH - 2 && !HasSeparator(path)) {
     return MakeErrorMessage(WSTR(__FILE__), __LINE__, L"AsShortPath", path,
                             L"path is just a file name but too long");
   }
@@ -225,7 +226,8 @@ wstring AsShortPath(wstring path, wstring* result) {
 
   std::replace(path.begin(), path.end(), '/', '\\');
   // Fast-track: the path is already short.
-  if (path.size() < MAX_PATH) {
+  // Comparing to MAX_PATH - 2 to fix https://github.com/bazelbuild/bazel/issues/12310
+  if (path.size() < MAX_PATH - 2) {
     *result = path;
     return L"";
   }
