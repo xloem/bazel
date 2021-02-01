@@ -39,8 +39,8 @@ using std::unique_ptr;
 using std::wstring;
 
 static const wstring kUncPrefix = wstring(L"\\\\?\\");
-// Using MAX_PATH - 2 instead of MAX_PATH to fix https://github.com/bazelbuild/bazel/issues/12310
-static const size_t kMaxPath = MAX_PATH - 2;
+// Using MAX_PATH - 4 instead of MAX_PATH to fix https://github.com/bazelbuild/bazel/issues/12310
+static const size_t kMaxPath = MAX_PATH - 4;
 
 // Retrieves TEST_TMPDIR as a shortened path. Result won't have a "\\?\" prefix.
 static void GetShortTempDir(wstring* result) {

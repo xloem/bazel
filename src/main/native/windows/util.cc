@@ -195,8 +195,8 @@ static bool Contains(const wstring& s, const WCHAR* substr) {
 }
 
 wstring AsShortPath(wstring path, wstring* result) {
-  // Using MAX_PATH - 2 instead of MAX_PATH to fix https://github.com/bazelbuild/bazel/issues/12310
-  static const size_t kMaxPath = MAX_PATH - 2;
+  // Using MAX_PATH - 4 (256) instead of MAX_PATH to fix https://github.com/bazelbuild/bazel/issues/12310
+  static const size_t kMaxPath = MAX_PATH - 4;
 
   if (path.empty()) {
     result->clear();
